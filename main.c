@@ -13,6 +13,7 @@ void exibir_menu(void) {
 
 void listar_produtos(Produto lista[], int total) {
     printf("\n--- Produtos Cadastrados ---\n");
+
     for (int i = 0; i < total; i++) {
         // BUG: quebra de linha está inadequada
         printf("ID: %d | Nome: %s | Preco: R$ %.2f | Qtd: %d | Codigo de barras: %s",
@@ -22,6 +23,7 @@ void listar_produtos(Produto lista[], int total) {
 
 float calcular_total(Produto lista[], int total) {
     float soma = 0.0;
+
     for (int i = 0; i < total; i++) {
         // ✅ ALTERAÇÃO 2: cálculo corrigido (preco * quantidade)
         soma += lista[i].preco * lista[i].quantidade;
@@ -35,7 +37,7 @@ float aplicar_desconto(float valor_total) {
 
 int main(void) {
     Produto estoque[MAX_ITENS];
-    int total_produtos = 2;
+    int total_produtos = 4;
 
     estoque[0].id = 1;
     strcpy(estoque[0].nome, "Caderno");
@@ -49,9 +51,21 @@ int main(void) {
     estoque[1].quantidade = 50;
     strcpy(estoque[1].codigo_barras, "7890002");
 
+    estoque[2].id = 3;
+    strcpy(estoque[2].nome, "Lapis");
+    estoque[2].preco = 1.50;
+    estoque[2].quantidade = 50;
+
+    estoque[3].id = 4;
+    strcpy(estoque[3].nome, "Borracha");
+    estoque[3].preco = 0.75;
+    estoque[3].quantidade = 50;
+
     int opcao = -1;
+
     while (opcao != 0) {
         exibir_menu();
+
         if (scanf("%d", &opcao) != 1) {
             break;
         }
@@ -60,8 +74,10 @@ int main(void) {
             case 1:
                 listar_produtos(estoque, total_produtos);
                 break;
+
             case 2:
-                printf("\nTotal em estoque: R$ %.2f\n", calcular_total(estoque, total_produtos));
+                printf("\nTotal em estoque: R$ %.2f\n",
+                       calcular_total(estoque, total_produtos));
                 break;
             case 3:
                 printf("\nValor com Desconto: R$ %2f\n", aplicar_desconto(calcular_total(estoque, total_produtos)));
@@ -69,6 +85,7 @@ int main(void) {
             case 0:
                 printf("\nEncerrando o programa...\n");
                 break;
+
             default:
                 printf("\nOpcao invalida!\n");
                 break;
