@@ -35,7 +35,7 @@ float aplicar_desconto(float valor_total) {
     return valor_total * 0.05;
 }
 float aplicar_juros(float valor_total) {
-    return valor_total * 0.08;
+    return valor_total +(valor_total * 0.08);
 }
 
 int main(void) {
